@@ -29,12 +29,39 @@ Optional parameter files can be specified for each source using --params1 and --
 
 			// Implement diff logic here
 			// Use source1, source2, params1, and params2 in your diff implementation
-            fmt.println("The implimentation of diff is yet to be...")
+            fmt.Println("The implimentation of diff is yet to be...")
 		},
 	}
 
 	cmd.Flags().StringVar(&params1, "params1", "", "Parameters file for source1 (optional)")
 	cmd.Flags().StringVar(&params2, "params2", "", "Parameters file for source2 (optional)")
+
+	return cmd
+}
+
+func ValidateCmd() *cobra.Command {
+	var params1 string
+
+	cmd := &cobra.Command{
+		Use:   "validate <source1> <source2>",
+		Short: "Validate a Logic App configuration",
+		Long: `Validate logic app configuration sourced from various sources such as directories, git repositories, or deployed instances.
+Optional parameter file can be specified for environment specific deployment configurations using --params1`,
+		Args: cobra.ExactArgs(1),
+		Run: func(cmd *cobra.Command, args []string) {
+			source1 := args[0]
+			fmt.Printf("Validating Logic App configurations:\n  Source 1: %s\n", source1)
+			
+			if params1 != "" {
+				fmt.Printf("  Parameters for Source 1: %s\n", params1)
+			}
+
+			// Implement validate logic here
+            fmt.Println("The implimentation of validate is yet to be...")
+		},
+	}
+
+	cmd.Flags().StringVar(&params1, "params1", "", "Parameters file for source1 (optional)")
 
 	return cmd
 }

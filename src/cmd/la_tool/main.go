@@ -6,8 +6,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/patrcoff/logicapp-config-manager/cli/commands"
-	"github.com/patrcoff/logicapp-config-manager/pkg/config"
+	"github.com/patrcoff/la-tool/src/cli/commands"
+	"github.com/patrcoff/la-tool/src/pkg/config"
 )
 
 var (
