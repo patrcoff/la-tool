@@ -1,10 +1,30 @@
 package commands
 
 import (
+    "errors"
 	"fmt"
-
+    s "strings"
+    re "regexp"
 	"github.com/spf13/cobra"
 )
+
+
+
+func DetectSourceType(source string) string, error {
+    // path/to/folder
+    // https://github.com/username/repo/path
+    // git@github.com/username/repo/path
+    // either_of_above?commithash
+    // path/to/archive
+
+    https := re.Compile("/https:\/\/.+\.[a-z]+\/*[a-z\-\/]*.*")
+
+    switch {
+    case https.MatchString(source):
+        return "https", nil
+    default:
+        return "unmatched", errors.New("Unrecognised source type")
+}
 
 func DiffCmd() *cobra.Command {
 	var params1, params2 string
@@ -30,7 +50,7 @@ Optional parameter files can be specified for each source using --params1 and --
 			// Implement diff logic here
 			// Use source1, source2, params1, and params2 in your diff implementation
             fmt.Println("The implimentation of diff is yet to be...")
-		},
+		},required files in each source type.
 	}
 
 	cmd.Flags().StringVar(&params1, "params1", "", "Parameters file for source1 (optional)")
